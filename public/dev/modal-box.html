@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Box</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link>
+</head>
+<body class="relative">
+
+
+    <button id="modal-button" class="m-4 p-2 bg-black text-white rounded font-bold hover:bg-white hover:text-black">Modal Box</button>
+    <div class="h-[2000px]">
+
+    </div>
+
+   
+
+    <section id="modal" class="w-full h-screen scroll-m-0 items-start justify-center p-6 absolute inset-0 bg-black/50 backdrop-blur hidden">
+        <div class="max-w-md p-7 bg-blue-700 rounded-lg shadow-md w-full relative transition ease-in-out duration-200">
+            <button id="close-modal" class="absolute right-6 top-6 bg-blue-500 p-1 rounded hover:opacity-80 z-50" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <h1 class="text-2xl font-bold mb-8 text-white">Buat Wallet</h1>
+            <div class="flex flex-col w-full">
+                <form action="" method="POST" class="grid grid-cols gap-4 w-full">
+                    <input type="text" name="wallet_name" class="text-gray-700 rounded-md border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Wallet Name">
+                    <input type="text" name="no_hp" class="text-gray-700 rounded-md border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Phone Number">
+                    <h2 class="text-white text-base font-semibold mt-4">Address</h2>
+                    <input type="text" name="jalan" class="text-gray-700 rounded-md border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Street">
+                    <input type="text" name="kota" class="text-gray-700 rounded-md border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="City">
+                    <input type="text" name="provinsi" class="text-gray-700 rounded-md border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Province">
+                    <button type="submit" name="buat" class="text-white text-semibold text-lg bg-blue-400 rounded-md py-1 w-24 hover:cursor-pointer hover:opacity-80">Buat</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+
+    <script src="../js/wallet-modal.js"></script>
+</body>
+</html>
