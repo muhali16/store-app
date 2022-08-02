@@ -16,7 +16,7 @@ class WalletController extends Controller
         $request->validate([
             'wallet_name' => 'required|min:5',
             'no_hp' => 'required|unique:wallets|min:11|max:13',
-            'jalan' => 'required|max:30',
+            'jalan' => 'required|max:255',
             'kota' => 'required|max:30',
             'provinsi' => 'required|max:30',
         ]);
@@ -33,9 +33,9 @@ class WalletController extends Controller
         ]);
 
         if($result){
-            return redirect('/')->with('success-wallet', 'Yeay, Wallet kamu sudah dibuat. <br>Selamat Berbelanja!');
+            return redirect('/home')->with('success-wallet', 'Yeay, Wallet kamu sudah dibuat. Selamat Berbelanja!');
         } else {
-            return abort(400);
+            return redirect('/home')->with('failed-wallet', 'Gagal membuka wallet! Cek kembali data yang dimasukan.');
         }
         
     }

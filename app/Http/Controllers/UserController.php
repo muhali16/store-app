@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -74,7 +75,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('profile.index', [
+        return view('profile.edit', [
             'user' => User::where('slug', $user->slug)->firstOrFail(),
         ]);
     }
@@ -83,28 +84,32 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user)
     {
-        $user = User::find($id);
 
-        $request->validate([
+        $data = [
             'firstname' =>'required',
             'lastname' =>'required',
-            'bio' =>'required',
-            'email' => 'required|unique:users',
-        ]);
+        ];
+
+        if($request->email != auth()->user()->email){
+            $data['email'] = 'required|unique:users';
+        }
         
-        $user->firstname = $request->firstname;
-        $user->lastname = $request->lastname;
-        $user->bio = $request->bio;
-        $user->email = $request->email;
+        $validated = $request->validate($data);
+        $validated['bio'] = htmlspecialchars($request->bio);
+    
+        $success = User::where('slug', $user)
+                ->update($validated);
 
-        $user->save();
-
-        return redirect('user/'. $user->slug)->with('success-edit-profile', 'Berhasil update profile');
+        if($success) {
+            return redirect('user/'. auth()->user()->slug)->with('success-edit-profile', 'Berhasil update profile');
+        } else {
+            echo abort(400);
+        }
     }
 
     /**
@@ -116,5 +121,45 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changePassword(Request $request, User $user)
+    {
+        
+        if(Hash::check($request->password, auth()->user()->password)){
+            $validated = $request->validate([
+                'new-password' => 'required|min:8|confirmed',
+                'new-password_confirmation' => 'required|min:8',
+            ]);
+            
+            $validated['new-password'] = Hash::make($validated['new-password']);
+    
+            $result = User::where('slug', $user->slug)->update(['password' => $validated['new-password'] ]);
+    
+            if($result){
+                return redirect()->back()->with('success-change-password', 'Your password has been changed.');
+            } else {
+                dd($user->slug);
+            }
+        } else {
+            return redirect()->back()->with('failed-password', 'Failed to verify your old password');
+        }
+    }
+
+    public function changePhoto(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            'profile_photo' => 'required|image|file|mimes:jpg,png|max:1024',
+        ]);
+
+        if(auth()->user()->photo != 'profile-photo/user.jpg'){
+            Storage::delete(auth()->user()->photo);
+        }
+        
+        $validated['profile_photo'] = $request->file('profile_photo')->store('profile-photo');
+
+        User::where('slug', $user->slug)->update(['photo' => $validated['profile_photo']]);
+
+        return redirect()->back()->with('sucess-change-photo', 'Your profile photo has been changed.');
     }
 }

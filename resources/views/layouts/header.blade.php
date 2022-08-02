@@ -25,10 +25,10 @@
                     </button>
                     <div id="setting-menu" class="hidden absolute z-50 translate-y-14 right-24 w-44 px-5 py-3 bg-blue-600 text-white text-md font-semibold rounded-md shadow-lg">
                         <ul>
-                            <a href="{{ route('user.show', ['user' => auth()->user()->slug]) }}"><li class="mb-3 hover:text-gray-200 w-full">Edit Profile</li></a>
+                            <a href="{{ route('user.edit', ['user' => auth()->user()->slug]) }}"><li class="mb-3 hover:text-gray-200 w-full">Edit Profile</li></a>
                             <a href="#"><li class="mb-3 hover:text-gray-200 w-full">Edit Kantin</li></a>
                             <a href="#"><li class="mb-3 hover:text-gray-200 w-full">Buka Kantin</li></a>
-                            <li class="hover:text-gray-200 w-full"><a href="/logout">Logout</a></li>
+                            <a href="/logout"><li class="hover:text-gray-200 w-full">Logout</li></a>
                         </ul>
                     </div>
                 </li>
@@ -56,22 +56,31 @@
                         </button>
                     </a>
                 </li>
+                @auth
                 <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
-                    <a href="#canteen">
+                    <a href="/user/{{ auth()->user()->slug }}">
+                        <button>
+                            Profile
+                        </button>
+                    </a>
+                </li>
+                @endauth
+                <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
+                    <a href="/home/#canteen">
                         <button>
                             Canteen
                         </button>
                     </a>
                 </li>
                 <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
-                    <a href="#menu">
+                    <a href="/home/#menu">
                         <button>
                             Menu
                         </button>
                     </a>
                 </li>
                 <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
-                    <a href="#about">
+                    <a href="/home/#about">
                         <button>
                             About
                         </button>

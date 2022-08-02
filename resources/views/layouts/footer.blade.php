@@ -57,6 +57,7 @@
 <script src="{{ asset('js/setting-menu.js') }}"></script>
 <script src="{{ asset('js/nav-menu.js') }}"></script>
 <script src="{{ asset('js/swiper.js') }}"></script>
+<script src="{{ asset('js/close-modal.js') }}"></script>
 <script type="module">
   import Swiper from 'https://unpkg.com/swiper@8/swiper-bundle.esm.browser.min.js';
 

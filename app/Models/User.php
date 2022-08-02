@@ -46,8 +46,7 @@ class User extends Authenticatable
     ];
 
     public $attributes = [
-        'bio' => NULL,
-        'photo' => 'user.jpg',
+        'photo' => 'profile-photo/user.jpg',
         'level' => 3,
     ];
 

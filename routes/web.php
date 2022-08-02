@@ -22,13 +22,17 @@ Route::get('/', function(){
     return redirect('home');
 });
 
-Route::get('/home', [DashboardController::class, 'index'])->name('home');
-
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'auth']);
-Route::get('/logout', [LoginController::class, 'logout']);
-Route::get('/signup', [SignupController::class, 'index']);
 
 Route::resource('/user', UserController::class)->scoped(['user' => 'slug']);
+Route::put('/user/{user:slug}/password', [UserController::class, 'changePassword']);
+Route::put('/user/{user:slug}/photo', [UserController::class, 'changePhoto']);
+
+Route::get('/home', [DashboardController::class, 'index'])->name('home');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'auth']);
+Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
+Route::get('/signup', [SignupController::class, 'index'])->name('signup')->middleware('guest');
+
 
 Route::post('/wallet', [WalletController::class, 'store']);

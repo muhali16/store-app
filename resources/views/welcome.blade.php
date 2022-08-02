@@ -2,54 +2,59 @@
 
 @section('container')
 @include('layouts.header')
-
 {{-- Wallet Modal Box --}}
-<section id="modal" class="w-full inset-0 items-start justify-center p-6 absolute bg-black/50 backdrop-blur hidden z-[99999] pt-24">
+<section id="modal" class="w-full inset-0 items-start justify-center p-6 absolute bg-black/50 backdrop-blur hidden z-[99999] pt-10">
     <div class="max-w-md p-7 bg-blue-700 rounded-lg shadow-md w-full relative transition ease-in-out duration-200">
-        <button id="close-modal" class="absolute right-6 top-6 bg-blue-500 p-1 rounded hover:opacity-80 z-50" >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <button id="close-modal" class="absolute right-6 top-6 bg-blue-500 p-1 rounded hover:opacity-80 z-50">
+            <svg class="stroke-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
         <h1 class="text-2xl font-bold mb-8 text-white">Buat Wallet</h1>
         <div class="flex flex-col w-full">
             <form action="/wallet" method="POST" class="grid grid-cols gap-4 w-full">
                 @csrf
-                <input type="text" name="wallet_name" class="text-gray-700 rounded-md border-none bg-blue-200 @error('wallet_name') ring-2 ring-red-600 @enderror py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Wallet Name" value="{{ old('wallet_name') }}">
+                <input type="text" name="wallet_name" class="text-gray-700 rounded-md border-none bg-blue-200 @error('wallet_name') ring-2 ring-red-600 @enderror py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Wallet Name" value="{{ old('wallet_name') }}" required>
                 @error('wallet_name')
                 <span class="mb-3 text-sm text-red-600 font-semibold">
                     {{ $message }}
                 </span>
                 @enderror
-                <input type="text" name="no_hp" class="text-gray-700 rounded-md border-none bg-blue-200 py-1 px-3 w-full @error('no_hp') ring-2 ring-red-600 @enderror focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Phone Number" value="{{ old('no_hp') }}">
+                <input type="text" name="no_hp" class="text-gray-700 rounded-md border-none bg-blue-200 py-1 px-3 w-full @error('no_hp') ring-2 ring-red-600 @enderror focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Phone Number" value="{{ old('no_hp') }}" required>
                 @error('no_hp')
                 <span class="mb-3 text-sm text-red-600 font-semibold">
                     {{ $message }}
                 </span>
                 @enderror
                 <h2 class="text-white text-base font-semibold mt-4">Address</h2>
-                <input type="text" name="jalan" class="text-gray-700 rounded-md @error('jalan') ring-2 ring-red-600 @enderror border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Street" value="{{ old('jalan') }}">
+                <input type="text" name="jalan" class="text-gray-700 rounded-md @error('jalan') ring-2 ring-red-600 @enderror border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Street" value="{{ old('jalan') }}" required>
                 @error('jalan')
                 <span class="mb-3 text-sm text-red-600 font-semibold">
                     {{ $message }}
                 </span>
                 @enderror
-                <input type="text" name="kota" class="text-gray-700 @error('kota') ring-2 ring-red-600 @enderror rounded-md border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="City" value="{{ old('kota') }}">
+                <input type="text" name="kota" class="text-gray-700 @error('kota') ring-2 ring-red-600 @enderror rounded-md border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="City" value="{{ old('kota') }}" required>
                 @error('kota')
                 <span class="mb-3 text-sm text-red-600 font-semibold">
                     {{ $message }}
                 </span>
                 @enderror
-                <input type="text" name="provinsi" class="text-gray-700 @error('provinsi') ring-2 ring-red-600 @enderror rounded-md border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Province" value="{{ old('provinsi') }}">
+                <input type="text" name="provinsi" class="text-gray-700 @error('provinsi') ring-2 ring-red-600 @enderror rounded-md border-none bg-blue-200 py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Province" value="{{ old('provinsi') }}" required>
                 @error('provinsi')
                 <span class="mb-3 text-sm text-red-600 font-semibold">
                     {{ $message }}
                 </span>
                 @enderror
+                <p class="text-sm text-blue-200 font-semibold">
+                    Pastikan data yang Anda isi adalah benar, karena Anda anda <span class="font-bold text-blue-300">tidak dapat mengubahnya kembali. </span>
+                </p>
+                <p class="text-sm text-blue-200 font-semibold">
+                    Dengan membuka wallet di Kantin Kejujuran, Anda menyetujui <a href="#" class="text-blue-300">privacy & policy</a> yang ada pada Kantin Kejujuran.</p>
                 <button type="submit" name="buat" class="text-white text-semibold text-lg bg-blue-400 rounded-md py-1 w-24 hover:cursor-pointer hover:opacity-80">Buat</button>
             </form>
         </div>
     </div>
 </section>
 
+{{-- Swiper Carousel --}}
 <article>
     <!-- Swiper -->
     <div class="swiper mySwiper w-full md:h-80">
@@ -78,7 +83,12 @@
 <section id="profile" class="w-full p-4 mb-4" name="Profile">
     <div class="bg-blue-200 p-5 rounded-lg shadow-lg border-t-4 border-blue-600">
         <figure class="flex flex-row space-x-4 items-center">
-            <img class="rounded-full border-4 border-blue-700 outline-4 outline-white" src="../image/users/user.jpg" alt="Muhammad Ali Mustaqim" width="120" height="120">
+            @auth
+                <img class="rounded-full border-4 border-blue-700 outline-4 outline-white" src="{{ asset('storage/'.auth()->user()->photo) }}" alt="{{ auth()->user()->lastname.' Photo' }}" width="120" height="120">
+            @endauth
+            @guest
+                <img class="rounded-full border-4 border-blue-700 outline-4 outline-white" src="{{ asset('storage/profile-photo/user.jpg') }}" alt="Profile Photo" width="120" height="120">
+            @endguest
             <figcaption class="flex flex-col justify-start">
                 @auth
                 @if (auth()->user()->wallet->user_id ?? 0 == auth()->user()->id)

@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'photo' => 'user.jpg',
+            'photo' => 'profile-photo/user.jpg',
             'slug' => 'laurence' . str()->random(11),
             'level' => 3,
             'firstname' => 'Laurence Nicholas',
