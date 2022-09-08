@@ -33,7 +33,7 @@ class WalletController extends Controller
         ]);
 
         if($result){
-            return redirect('/home')->with('success-wallet', 'Yeay, Wallet kamu sudah dibuat. Selamat Berbelanja!');
+            return redirect('/home')->with('success-wallet', 'Yeay, Wallet kamu sudah dibuat. Jangan lupa isi wallet ya, Selamat Berbelanja!');
         } else {
             return redirect('/home')->with('failed-wallet', 'Gagal membuka wallet! Cek kembali data yang dimasukan.');
         }

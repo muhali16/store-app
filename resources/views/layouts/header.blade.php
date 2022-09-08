@@ -26,8 +26,12 @@
                     <div id="setting-menu" class="hidden absolute z-50 translate-y-14 right-24 w-44 px-5 py-3 bg-blue-600 text-white text-md font-semibold rounded-md shadow-lg">
                         <ul>
                             <a href="{{ route('user.edit', ['user' => auth()->user()->slug]) }}"><li class="mb-3 hover:text-gray-200 w-full">Edit Profile</li></a>
-                            <a href="#"><li class="mb-3 hover:text-gray-200 w-full">Edit Kantin</li></a>
-                            <a href="#"><li class="mb-3 hover:text-gray-200 w-full">Buka Kantin</li></a>
+                            @can('canteen-dashboard')
+                                <a href="{{ url('/canteen/dashboard') }}"><li class="mb-3 hover:text-gray-200 w-full">Dashboard Kantin</li></a>
+                            @endcan
+                            @can('open-canteen')
+                                <a href="{{ url('/canteen/create') }}"><li class="mb-3 hover:text-gray-200 w-full">Buka Kantin</li></a>
+                            @endcan
                             <a href="/logout"><li class="hover:text-gray-200 w-full">Logout</li></a>
                         </ul>
                     </div>

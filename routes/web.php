@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\CanteenController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CanteenDahboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +21,14 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', function(){
-    return redirect('home');
-});
-
+Route::get('/', fn() => redirect('home'));
 
 Route::resource('/user', UserController::class)->scoped(['user' => 'slug']);
-Route::put('/user/{user:slug}/password', [UserController::class, 'changePassword']);
-Route::put('/user/{user:slug}/photo', [UserController::class, 'changePhoto']);
+
+Route::controller(UserController::class)->prefix('/user')->group(function(){
+    Route::put('/{user:slug}/password', 'changePassword');
+    Route::put('/{user:slug}/photo', 'changePhoto');
+});
 
 Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
@@ -36,3 +39,16 @@ Route::get('/signup', [SignupController::class, 'index'])->name('signup')->middl
 
 
 Route::post('/wallet', [WalletController::class, 'store']);
+
+Route::prefix('/canteen/dashboard')->middleware('canteen-admin')
+            ->group(function(){
+                Route::get('/', [CanteenDahboardController::class, 'index'])->name('canteen-admin-dashboard');
+                Route::resource('/menu', MenuController::class);
+            });
+
+Route::prefix('/canteen')->controller(CanteenController::class)->middleware('auth')->group(function(){
+    Route::get('/', 'index')->withoutMiddleware('auth');
+    Route::get('/create', 'create');
+    Route::post('/', 'store');
+    Route::get('/{id}', 'show')->withoutMiddleware('auth');
+});

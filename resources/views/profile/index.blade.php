@@ -15,6 +15,11 @@
             </div>
             <div class="w-full md:px-7 mt-5 md:w-2/5 md:mt-0">
                 <h1 class="text-2xl text-blue-900 font-bold border-gray-300 pb-3">Profile</h1>
+                @if (session('success-edit-profile'))
+                        <div class="w-full bg-green-300 border border-green-700 text-green-900 text-lg rounded-md my-4 p-3">
+                            {{ session('success-edit-profile') }}
+                        </div>
+                    @endif
                 <div class="flex flex-col">
                     <label for="firstname" class="mb-1">Firstname</label >
                     <input type="text" name="firstname" id="firstname" class="px-2 py-1 text-gray-600 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-blue-600 border-blue-400 border disabled:bg-transparent" value="{{ $user->firstname }}" disabled></input>

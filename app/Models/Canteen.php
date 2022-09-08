@@ -9,5 +9,16 @@ class Canteen extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['bio', 'name'];
+    // protected $fillable = ['bio', 'name'];
+
+    protected $guarded = ['id'];
+
+    public $attributes = [
+        'status' => 0,
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

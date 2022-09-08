@@ -1,4 +1,4 @@
-<footer id="about" class="bg-blue-800 w-full p-6 md:px-10">
+<footer id="about" class="mt-20 bg-blue-800 w-full p-6 md:px-10">
     <h1 class="text-3xl font-bold text-white py-7">Kantin Kejujuran</h1>
     <div class="md:grid md:grid-cols-3 md:gap-12">
         <div class="mb-7">

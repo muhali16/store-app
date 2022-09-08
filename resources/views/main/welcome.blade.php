@@ -154,47 +154,17 @@
 </section>
 <section id="canteen" class="p-4 mt-4 w-full">
     <h1 class="text-4xl font-bold text-blue-900 pb-3 border-b-2 mb-3">Kantin</h1>
-    <div class="flex flex-wrap p-5 md:grid md:grid-cols-2 lg:grid-cols-4 md:justify-center">
-        <div class="border bg-blue-900 rounded-lg w-full overflow-hidden relative mb-5 md:w-72">
-            <img class="bg-cover bg-center" src="../image/canteen/banner.jpg" alt="Canteen Photo">
-            <div class="p-5">
-                <h2 class="text-xl text-gray-100 font-bold mb-2">Kantin Bu Darmi</h2>
-                <p class="text-sm text-gray-300 font-semibold mb-3">Blok A No.3, Kantin Fakultas Ilmu Komputer, Universitas Indonesia</p>
-                <h3 class="text-base text-blue-400 hover:text-blue-500 w-fit"><a href="#">Kunjungi Kantin</a></h3>
+    <div class="flex flex-wrap p-5 md:grid md:grid-cols-2 lg:grid-cols-4 md:justify-center gap-7">
+        @foreach ($canteens as $canteen)
+            <div class="border rounded-lg w-full overflow-hidden relative mb-5 md:w-72">
+                <img class="bg-cover bg-center" src="{{ asset('storage/'. $canteen->foto) }}" alt="Canteen Photo">
+                <div class="p-5">
+                    <h2 class="text-xl text-gray-700 font-bold mb-2">{{ $canteen->nama_kantin }}</h2>
+                    <p class="text-sm text-gray-500 font-semibold mb-3">{{ $canteen->alamat }}</p>
+                    <h3 class="text-base text-blue-600 hover:text-blue-800"><a href="/canteen/{{ $canteen->id }}">Kunjungi Kantin</a></h3>
+                </div>
             </div>
-        </div>
-        <div class="border rounded-lg w-full overflow-hidden relative mb-5 md:w-72">
-            <img class="bg-cover bg-center" src="../image/canteen/banner.jpg" alt="Canteen Photo">
-            <div class="p-5">
-                <h2 class="text-xl text-gray-700 font-bold mb-2">Kantin Bu Darmi</h2>
-                <p class="text-sm text-gray-500 font-semibold mb-3">Blok A No.3, Kantin Fakultas Ilmu Komputer, Universitas Indonesia</p>
-                <h3 class="text-base text-blue-600 hover:text-blue-800"><a href="#">Kunjungi Kantin</a></h3>
-            </div>
-        </div>
-        <div class="border rounded-lg w-full overflow-hidden relative mb-5 md:w-72">
-            <img class="bg-cover bg-center" src="../image/canteen/banner.jpg" alt="Canteen Photo">
-            <div class="p-5">
-                <h2 class="text-xl text-gray-700 font-bold mb-2">Kantin Bu Darmi</h2>
-                <p class="text-sm text-gray-500 font-semibold mb-3">Blok A No.3, Kantin Fakultas Ilmu Komputer, Universitas Indonesia</p>
-                <h3 class="text-base text-blue-600 hover:text-blue-800"><a href="#">Kunjungi Kantin</a></h3>
-            </div>
-        </div>
-        <div class="border rounded-lg w-full overflow-hidden relative mb-5 md:w-72">
-            <img class="bg-cover bg-center" src="../image/canteen/banner.jpg" alt="Canteen Photo">
-            <div class="p-5">
-                <h2 class="text-xl text-gray-700 font-bold mb-2">Kantin Bu Darmi</h2>
-                <p class="text-sm text-gray-500 font-semibold mb-3">Blok A No.3, Kantin Fakultas Ilmu Komputer, Universitas Indonesia</p>
-                <h3 class="text-base text-blue-600 hover:text-blue-800"><a href="#">Kunjungi Kantin</a></h3>
-            </div>
-        </div>
-        <div class="border rounded-lg w-full overflow-hidden relative mb-5 md:w-72">
-            <img class="bg-cover bg-center" src="../image/canteen/banner.jpg" alt="Canteen Photo">
-            <div class="p-5">
-                <h2 class="text-xl text-gray-700 font-bold mb-2">Kantin Bu Darmi</h2>
-                <p class="text-sm text-gray-500 font-semibold mb-3">Blok A No.3, Kantin Fakultas Ilmu Komputer, Universitas Indonesia</p>
-                <h3 class="text-base text-blue-600 hover:text-blue-800"><a href="#">Kunjungi Kantin</a></h3>
-            </div>
-        </div>
+        @endforeach
     </div>
 </section>
 </main>

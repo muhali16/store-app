@@ -15,9 +15,15 @@ return new class extends Migration
     {
         Schema::create('canteens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('name');
-            $table->text('bio');
+            $table->foreignId('user_id')->unique();
+            $table->string('nama_pemilik');
+            $table->string('nama_kantin');
+            $table->string('no_hp')->unique();
+            $table->string('alamat');
+            $table->string('foto');
+            $table->string('banner');
+            $table->text('deskripsi');
+            $table->integer('status');
             $table->timestamps();
         });
     }

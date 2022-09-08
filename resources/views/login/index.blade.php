@@ -11,12 +11,12 @@
             <form action="" method="post" class="flex flex-col space-y-5 items-end mb-3 border-b-2 pb-5">
                 @csrf
                 @if (session('failed-login'))
-                    <div class="w-96 font-bold bg-red-100 rounded-lg py-2 px-5 mb-4 text-base text-red-700" role="alert">
+                    <div class="w-96 bg-red-100 rounded-lg py-2 px-5 mb-4 text-base text-red-700" role="alert">
                         {{ session('failed-login') }}
                     </div>
                 @endif
                 @if (session('success-login'))
-                    <div class="w-96 font-bold bg-green-100 rounded-lg py-2 px-5 mb-4 text-base text-green-700" role="alert">
+                    <div class="w-96 bg-green-100 rounded-lg py-2 px-5 mb-4 text-base text-green-700" role="alert">
                         {{ session('success-login') }}
                     </div>
                 @endif

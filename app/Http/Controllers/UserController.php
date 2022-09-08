@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -47,7 +47,8 @@ class UserController extends Controller
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
-        $validated['slug'] = str()->random(11);
+        $slug = $validated['firstname'] . ' ' . $validated['lastname'] . ' ' . str()->random(10);
+        $validated['slug'] = str()->of($slug)->slug('-')->lower();
         
         User::create($validated);
 
@@ -160,6 +161,6 @@ class UserController extends Controller
 
         User::where('slug', $user->slug)->update(['photo' => $validated['profile_photo']]);
 
-        return redirect()->back()->with('sucess-change-photo', 'Your profile photo has been changed.');
+        return redirect()->back()->with('success-change-photo', 'Your profile photo has been changed.');
     }
 }
