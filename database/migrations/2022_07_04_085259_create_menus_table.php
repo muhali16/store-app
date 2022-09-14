@@ -18,8 +18,12 @@ return new class extends Migration
             $table->foreignId('canteen_id');
             $table->foreignId('category_id');
             $table->string('name');
+            $table->string('photo');
             $table->integer('harga');
             $table->text('deskripsi');
+            $table->string('is_recomended')->nullable();
+            $table->string('is_empty')->nullable();
+            $table->string('is_active')->nullable();
             $table->timestamps();
         });
     }

@@ -8,3 +8,5 @@
     </ul>
     <p class="text-center text-sm mt-3">&copy; Muhammad Ali Mustaqim 2022</p>
 </footer>
+
+@vite('resources/js/notify-btn.js')

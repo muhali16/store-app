@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\Canteen;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CanteenController extends Controller
 {
@@ -72,10 +75,35 @@ class CanteenController extends Controller
      */
     public function show($id)
     {
+
+        $recomended_menus = Menu::where('is_recomended', 'on')->where('is_active', 'on')->get();
+        $all_menus = Menu::where('is_active', 'on')->get();
+        
+        $menus = Menu::where('is_active', 'on')->get();
+        $counts = $menus->countBy(function($menu){
+            return $menu->category_id;
+        });
+        $categories_temp = array_keys($counts->all()) ;
+        $categories = [];
+        foreach($categories_temp as $cat){
+            foreach(Category::all() as $cate){
+                if($cat == $cate->id){
+                    $cat = $cate->name;
+                    $categories[] = $cat;
+                }
+            }
+        }
+
+        $categories_temp = collect($categories_temp);
+        $categories = $categories_temp->combine($categories);
         $canteen = Canteen::find($id);
+        
         return view('main.canteen.index', [
             'title' => 'Kantin - ' . $canteen->nama_kantin,
             'canteen' => $canteen,
+            'menus' => $all_menus,
+            'categories' => $categories,
+            'recomended_menus' => $recomended_menus,
         ]);
     }
 

@@ -3,8 +3,8 @@
 @section('container')
 @include('layouts.header')
 {{-- Wallet Modal Box --}}
-<section id="modal" class="w-full inset-0 items-start justify-center p-6 absolute bg-black/50 backdrop-blur hidden z-[99999] pt-10">
-    <div class="max-w-md p-7 bg-blue-700 rounded-lg shadow-md w-full relative transition ease-in-out duration-200">
+<section id="modal" class="h-fit w-full inset-0 items-start justify-center p-6 absolute z-[99999] pt-10 -top-[700px] transition-all ease-in duration-500">
+    <div class="max-w-md p-7 bg-blue-700 rounded-lg shadow-xl w-full relative">
         <button id="close-modal" class="absolute right-6 top-6 bg-blue-500 p-1 rounded hover:opacity-80 z-50">
             <svg class="stroke-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -43,11 +43,11 @@
                     {{ $message }}
                 </span>
                 @enderror
-                <p class="text-sm text-blue-200 font-semibold">
-                    Pastikan data yang Anda isi adalah benar, karena Anda anda <span class="font-bold text-blue-300">tidak dapat mengubahnya kembali. </span>
+                <p class="text-sm text-blue-200">
+                    Pastikan data yang Anda isi adalah benar, karena Anda anda <span class="font-bold text-white">tidak dapat mengubahnya kembali. </span>
                 </p>
-                <p class="text-sm text-blue-200 font-semibold">
-                    Dengan membuka wallet di Kantin Kejujuran, Anda menyetujui <a href="#" class="text-blue-300">privacy & policy</a> yang ada pada Kantin Kejujuran.</p>
+                <p class="text-sm text-blue-200">
+                    Dengan membuka wallet di Kantin Kejujuran, Anda menyetujui <a href="#" class="text-white font-bold">privacy & policy</a> yang ada pada Kantin Kejujuran.</p>
                 <button type="submit" name="buat" class="text-white text-semibold text-lg bg-blue-400 rounded-md py-1 w-24 hover:cursor-pointer hover:opacity-80">Buat</button>
             </form>
         </div>
@@ -57,7 +57,7 @@
 {{-- Swiper Carousel --}}
 <article>
     <!-- Swiper -->
-    <div class="swiper mySwiper w-full md:h-80">
+    <div class="swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="../image/banners/1.jpg" alt="banner1" class="bg-cover wf-full"></div>
             <div class="swiper-slide"><img src="../image/banners/2.jpg" alt="banner2" srcset=""></div>
@@ -71,8 +71,10 @@
 
 <main class="md:px-6">
 @if (session('success-wallet'))
-    <div class="w-full bg-green-300 border border-green-700 text-green-900 text-lg rounded-md my-4 p-3">
+    <div id="notify" class="justify-between items-center w-full bg-green-300 border border-green-700 text-green-900 text-lg rounded-md my-4 px-6 flex">
         {{ session('success-wallet') }}
+        {{-- Yeay, Wallet kamu sudah dibuat. Jangan lupa isi wallet ya, Selamat Berbelanja! --}}
+        <button id="close-notify"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
     </div>
 @endif
 @error ('no_hp')
@@ -98,7 +100,7 @@
                     <p class="text-sm"><span class="font-bold">HP</span>   {{ auth()->user()->wallet->no_hp }}</p>
                 @else
                     <h1 class="text-xl text-blue-700 font-semibold">Belum ada dompetnya nih!</h1>
-                    <h2 class="text-sm text-blue-700 font-semibold">Buka dompet yuk. <button id="modal-button" class="px-3 bg-blue-600 text-white hover:scale-110 transition ease-in-out duration-200">Wallet</button></h2>
+                    <h2 class="text-sm text-blue-700 font-semibold">Buka dompet yuk. <button id="modal-button" class="px-3 bg-blue-600 text-white hover:scale-110 transition ease-out duration-200">Wallet</button></h2>
                     <p class="text-lg"><span class="font-bold">Name</span>   {{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</p>
                 @endif
                 @endauth
@@ -114,42 +116,14 @@
 <section id="menu" class="w-full px-4" name="menu">
     <h1 class="text-4xl font-bold text-blue-900 pb-3 border-b-2 mb-3">Beli apa ya?</h1>
     <div class="p-4 rounded-lg border-2 shadow-md grid grid-cols-2 items-center justify-center gap-5 md:flex md:flex-wrap md:justify-center">
+        @foreach ($categories as $category)
         <div class="overflow-hidden w-36 h-36 relative rounded-lg">
             <div class="absolute bg-orange-600 text-white font-bold px-4 py-1 rounded-br-lg">
-                Food
+                {{ $category->name }}
             </div>
-            <img class="bg-cover bg-center transition ease-in-out duration-200 w-full hover:scale-125" src="../image/products/food.jpg" alt="Food">
+            <img class="object-cover bg-cover bg-center transition ease-in-out duration-200 w-full hover:scale-125" src="{{ asset('storage/'.$category->photo) }}" alt="Food">
         </div>
-        <div class="overflow-hidden w-36 h-36 relative rounded-lg">
-            <div class="absolute bg-orange-600 text-white font-bold px-4 py-1 rounded-br-lg">
-                Drink
-            </div>
-            <img class="bg-cover bg-center transition ease-in-out duration-200 w-full hover:scale-125" src="../image/products/drink.jpg" alt="drink">
-        </div>
-        <div class="overflow-hidden w-36 h-36 relative rounded-lg">
-            <div class="absolute bg-orange-600 text-white font-bold px-4 py-1 rounded-br-lg">
-                Popcorn
-            </div>
-            <img class="bg-cover bg-center transition ease-in-out duration-200 w-full h-full hover:scale-125" src="../image/products/snack2.jpg" alt="Popcorn">
-        </div>
-        <div class="overflow-hidden w-36 h-36 relative rounded-lg">
-            <div class="absolute bg-orange-600 text-white font-bold px-4 py-1 rounded-br-lg">
-                Snack
-            </div>
-            <img class="bg-cover bg-center transition ease-in-out duration-200 w-full hover:scale-125" src="../image/products/snack.jpg" alt="snack">
-        </div>
-        <div class="overflow-hidden w-36 h-36 relative rounded-lg">
-            <div class="absolute bg-orange-600 text-white font-bold px-4 py-1 rounded-br-lg">
-                Fruit
-            </div>
-            <img class="bg-cover bg-center transition ease-in-out duration-200 w-full h-full hover:scale-125" src="../image/products/snack3.jpg" alt="Fruit">
-        </div>
-        <div class="overflow-hidden w-36 h-36 relative rounded-lg">
-            <div class="absolute bg-orange-600 text-white font-bold px-4 py-1 rounded-br-lg">
-                Cake
-            </div>
-            <img class="bg-cover bg-center transition ease-in-out duration-200 w-full h-full hover:scale-125" src="../image/products/cake.jpg" alt="Cake">
-        </div>
+        @endforeach
     </div>
 </section>
 <section id="canteen" class="p-4 mt-4 w-full">

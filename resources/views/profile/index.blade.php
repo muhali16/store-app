@@ -4,7 +4,7 @@
 
 @include('layouts.header')
 
-<main class="py-7 px-4">
+<main class="py-7 px-4 md:px-6">
     <section class="w-full flex flex-col space-y-6 ">
         @auth
             <h1 class="w-full text-4xl text-blue-900 font-bold px-4">Selamat datang, {{ $user->firstname }}!</h1>

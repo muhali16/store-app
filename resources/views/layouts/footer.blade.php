@@ -51,27 +51,8 @@
     </div>
 </footer>
 
-
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-<script src="{{ asset('js/wallet-modal.js') }}"></script>
-<script src="{{ asset('js/setting-menu.js') }}"></script>
-<script src="{{ asset('js/nav-menu.js') }}"></script>
-<script src="{{ asset('js/swiper.js') }}"></script>
-<script src="{{ asset('js/close-modal.js') }}"></script>
-<script type="module">
-  import Swiper from 'https://unpkg.com/swiper@8/swiper-bundle.esm.browser.min.js';
-
-    var swiper = new Swiper(".mySwiper", {
-    pagination: {
-      el: ".swiper-pagination",
-      type: "progressbar",
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    autoplay: {
-        delay: 3000,
-    }
-  });
-</script>
+@vite('resources/js/swiper.js')
+@vite('resources/js/wallet-btn.js')
+@vite('resources/js/menu-btn.js')
+@vite('resources/js/notify-btn.js')
+@vite('resources/js/setting-btn.js')

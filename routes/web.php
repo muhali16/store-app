@@ -43,6 +43,8 @@ Route::post('/wallet', [WalletController::class, 'store']);
 Route::prefix('/canteen/dashboard')->middleware('canteen-admin')
             ->group(function(){
                 Route::get('/', [CanteenDahboardController::class, 'index'])->name('canteen-admin-dashboard');
+                Route::get('/menu/{menu}/setting', [MenuController::class, 'setting'])->name('menu-setting');
+                Route::post('/menu/{menu}/setting', [MenuController::class, 'tst'])->name('menu-setting-tst');
                 Route::resource('/menu', MenuController::class);
             });
 

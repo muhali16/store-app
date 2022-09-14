@@ -1,11 +1,8 @@
-  // import Swiper bundle with all modules installed
-  import Swiper from '../../node_modules/swiper';
+import Swiper from "swiper/bundle";
 
-  // import styles bundle
-  import 'swiper/css/bundle';
+import 'swiper/css/bundle';
 
-  // init Swiper:
-  var swiper = new Swiper(".mySwiper", {
+new Swiper(".swiper", {
     pagination: {
       el: ".swiper-pagination",
       type: "progressbar",
