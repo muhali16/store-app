@@ -60,9 +60,9 @@
                     <input type="checkbox" name="is_empty" id="is_empty" class="sr-only peer" 
                     @if ($detail->is_empty != null)
                         @checked(true)
-                        @if ($detail->is_active == null)
-                            {{ 'disabled' }}
-                        @endif
+                    @endif
+                    @if ($detail->is_active == null)
+                        {{ 'disabled' }}
                     @endif>
                     <span class="absolute bg-blue-300 w-1/3 h-3/5 rounded-full left-2 top-1.5 peer-checked:bg-white peer-checked:left-8 transition-all duration-300"></span>
                 </label>

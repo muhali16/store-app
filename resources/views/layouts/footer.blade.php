@@ -56,3 +56,4 @@
 @vite('resources/js/menu-btn.js')
 @vite('resources/js/notify-btn.js')
 @vite('resources/js/setting-btn.js')
+@vite('resources/js/tw-elements.js')

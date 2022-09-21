@@ -70,21 +70,21 @@
                 </li>
                 @endauth
                 <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
-                    <a href="/home/#canteen">
+                    <a href="#canteen">
                         <button>
                             Canteen
                         </button>
                     </a>
                 </li>
                 <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
-                    <a href="/home/#menu">
+                    <a href="#menu">
                         <button>
                             Menu
                         </button>
                     </a>
                 </li>
                 <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
-                    <a href="/home/#about">
+                    <a href="#about">
                         <button>
                             About
                         </button>

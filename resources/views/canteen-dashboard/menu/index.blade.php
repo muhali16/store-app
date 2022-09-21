@@ -50,7 +50,7 @@
     @endif
 
     {{-- Tabel Menu Aktif --}}
-    <div id="1" class="mb-7">
+    <div id="1" class="mb-20">
         <table class="table-fixed w-full">
             <thead class="text-center border-b-4 border-black">
                 <td class="p-2">No</td>
@@ -67,9 +67,7 @@
                 <tr class="border-b-2">
                     <td class="p-2 text-center">{{ $loop->iteration }}</td>
                     <td class="hidden sm:hidden md:block p-2">
-                        <div class="w-32 h-32 overflow-hidden">
-                            <img src="{{ asset('storage/'. $active_menu->photo) }}" alt="Foto Menu" class="object-cover bg-cover bg-center bg-current">
-                        </div>
+                        <img src="{{ asset('storage/'. $active_menu->photo) }}" alt="Foto Menu" class="w-32 h-32">
                     </td>
                     <td class="p-2">{{ $active_menu->name }}</td>
                     <td class="hidden sm:hidden md:block p-2">{{ $active_menu->deskripsi }}</td>
@@ -115,8 +113,8 @@
     </div>
 
     {{-- Tabel Menu tidak aktif --}}
-    <div id="2" class="mb-7">
-        <h1 class="text-3xl mb-3 pb-2 border-b-2 border-blue-300">Menu Tidak Aktif</h1>
+    <div id="2" class="mb-20">
+        <h1 class="text-red-500 text-3xl mb-3 pb-2 border-b-2 border-blue-300">Menu Tidak Aktif</h1>
         <table class="table-fixed w-full">
             <thead class="text-center border-b-4 border-black">
                 <td class="p-2">No</td>
@@ -181,7 +179,7 @@
     </div>
 
     {{-- Tabel Menu Habis --}}
-    <div id="3" class="mb-7">
+    <div id="3" class="mb-20">
         <h1 class="text-3xl mb-3 pb-2 border-b-2 border-blue-300">Menu Habis</h1>
         <table class="table-fixed w-full">
             <thead class="text-center border-b-4 border-black">

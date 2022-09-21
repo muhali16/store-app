@@ -7,6 +7,7 @@ use App\Models\Canteen;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class CanteenController extends Controller
 {
@@ -17,7 +18,7 @@ class CanteenController extends Controller
      */
     public function index()
     {
-        return auth()->user()->canteen->nama_kantin;
+        return abort(500);
     }
 
     /**
@@ -43,9 +44,6 @@ class CanteenController extends Controller
         if(!auth()->check()){
             return abort(403);
         }
-        // if($request->snk != 1){
-        //     redirect()->back()->with('snk-failed');
-        // }
 
         $validated = $request->validate([
             'nama_pemilik' => 'required|max:100',
@@ -53,7 +51,7 @@ class CanteenController extends Controller
             'no_hp' => 'required|unique:canteens|min:10|max:13',
             'alamat' => 'required|max:255',
             'foto' => 'required|image|file|mimes:jpg,png|max:1024',
-            'banner' => 'required|image|file|mimes:jpg,png|max:1024|dimensions:width=4000,height=900',
+            'banner' => 'required|image|file|mimes:jpg,png|max:1024',
             'deskripsi' => 'required|min:20|max:255',
             'snk' => 'required',
         ]);
@@ -62,6 +60,7 @@ class CanteenController extends Controller
         $validated['foto'] = $request->file('foto')->store('foto-kantin');
         $validated['banner'] = $request->file('banner')->store('banner-kantin');
 
+        User::where('id', auth()->user()->id)->update(['level' => 2]);
         Canteen::create($validated);
 
         return redirect()->back()->with('canteen-success', 'Pengajuan pembukaan kantin berhasil. Silakan tunggu 2x24 jam untuk proses verifikasi atau anda bisa langsung menguhubungi administrator.');
@@ -79,6 +78,7 @@ class CanteenController extends Controller
         $recomended_menus = Menu::where('is_recomended', 'on')->where('is_active', 'on')->get();
         $all_menus = Menu::where('is_active', 'on')->get();
         
+        // membuat collection category untuk kantin
         $menus = Menu::where('is_active', 'on')->get();
         $counts = $menus->countBy(function($menu){
             return $menu->category_id;
@@ -97,7 +97,9 @@ class CanteenController extends Controller
         $categories_temp = collect($categories_temp);
         $categories = $categories_temp->combine($categories);
         $canteen = Canteen::find($id);
-        
+        if(!$canteen){
+            return abort(404);
+        }
         return view('main.canteen.index', [
             'title' => 'Kantin - ' . $canteen->nama_kantin,
             'canteen' => $canteen,

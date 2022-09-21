@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "sass": "^1.54.9",
-        "swiper": "^8.3.2"
+        "swiper": "^8.3.2",
+        "tw-elements": "^1.0.0-alpha12"
     }
 }

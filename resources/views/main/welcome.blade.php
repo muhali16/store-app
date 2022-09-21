@@ -71,7 +71,7 @@
 
 <main class="md:px-6">
 @if (session('success-wallet'))
-    <div id="notify" class="justify-between items-center w-full bg-green-300 border border-green-700 text-green-900 text-lg rounded-md my-4 px-6 flex">
+    <div id="notify" class="justify-between items-center w-full bg-green-300 border border-green-700 text-green-900 text-lg rounded-md my-4 px-6 flex md:px-10">
         {{ session('success-wallet') }}
         {{-- Yeay, Wallet kamu sudah dibuat. Jangan lupa isi wallet ya, Selamat Berbelanja! --}}
         <button id="close-notify"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>

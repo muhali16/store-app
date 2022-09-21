@@ -9,6 +9,7 @@ use App\Http\Controllers\WalletController;
 use App\Http\Controllers\CanteenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CanteenDahboardController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,5 @@ Route::prefix('/canteen')->controller(CanteenController::class)->middleware('aut
     Route::post('/', 'store');
     Route::get('/{id}', 'show')->withoutMiddleware('auth');
 });
+
+Route::resource('/cart', CartController::class)->middleware('auth');

@@ -10,3 +10,4 @@
 </footer>
 
 @vite('resources/js/notify-btn.js')
+@vite('resources/js/tw-elements.js')
