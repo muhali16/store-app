@@ -59,10 +59,10 @@
     <!-- Swiper -->
     <div class="swiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="../image/banners/1.jpg" alt="banner1" class="bg-cover wf-full"></div>
-            <div class="swiper-slide"><img src="../image/banners/2.jpg" alt="banner2" srcset=""></div>
-            <div class="swiper-slide"><img src="../image/banners/3.jpg" alt="banner3" srcset=""></div>
-            <div class="swiper-slide"><img src="../image/banners/4.jpg" alt="banner4" srcset=""></div>
+            <div class="swiper-slide"><img src="{{ asset('/image/banners/1.jpg') }}" alt="banner1" class="bg-cover wf-full"></div>
+            <div class="swiper-slide"><img src="{{ asset('/image/banners/2.jpg') }}" alt="banner2" srcset=""></div>
+            <div class="swiper-slide"><img src="{{ asset('/image/banners/3.jpg') }}" alt="banner3" srcset=""></div>
+            <div class="swiper-slide"><img src="{{ asset('/image/banners/4.jpg') }}" alt="banner4" srcset=""></div>
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
@@ -135,7 +135,7 @@
                 <div class="p-5">
                     <h2 class="text-xl text-gray-700 font-bold mb-2">{{ $canteen->nama_kantin }}</h2>
                     <p class="text-sm text-gray-500 font-semibold mb-3">{{ $canteen->alamat }}</p>
-                    <h3 class="text-base text-blue-600 hover:text-blue-800"><a href="/canteen/{{ $canteen->id }}">Kunjungi Kantin</a></h3>
+                    <h3 class="text-base text-blue-600 hover:text-blue-800"><a href="{{ route('canteen.show', ['id' => $canteen->id]) }}">Kunjungi Kantin</a></h3>
                 </div>
             </div>
         @endforeach

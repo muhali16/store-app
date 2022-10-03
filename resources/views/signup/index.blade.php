@@ -8,7 +8,7 @@
             <h2 class="text-2xl font-semibold">Kantin Kejujuran</h2>
         </div>
         <div class="mt-10">
-            <form action="/user" method="POST" class="flex flex-col space-y-5 items-end mb-3 border-b-2 pb-5">
+            <form action="{{ route('user.store') }}" method="POST" class="flex flex-col space-y-5 items-end mb-3 border-b-2 pb-5">
                 @csrf
                 <input type="text" name="firstname" placeholder="Firstname" class="bg-gray-200 rounded-md py-2 px-3 w-96 border-none @error('name') ring-2 ring-red-600 @enderror focus:ring-2 focus:ring-gray-400 focus:outline-none focus:bg-white" autocomplete="on" required value="{{ old('firstname') }}"></input>
                 @error('firstname')
@@ -42,7 +42,7 @@
                 @enderror
                 <button type="submit" class="py-2 px-3 w-32 rounded-md text-white bg-blue-900 font-bold hover:opacity-80">Login</button>
             </form>
-            <p class="text-center text-sm">Already have account? <a href="/login" class="text-blue-700 ">Login</a>.</p>
+            <p class="text-center text-sm">Already have account? <a href="{{ route('login') }}" class="text-blue-700 ">Login</a>.</p>
         </div>
     </div>
 </section>

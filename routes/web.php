@@ -35,7 +35,7 @@ Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'auth']);
-Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 Route::get('/signup', [SignupController::class, 'index'])->name('signup')->middleware('guest');
 
 
@@ -50,10 +50,10 @@ Route::prefix('/canteen/dashboard')->middleware('canteen-admin')
             });
 
 Route::prefix('/canteen')->controller(CanteenController::class)->middleware('auth')->group(function(){
-    Route::get('/', 'index')->withoutMiddleware('auth');
+    Route::get('/', 'index')->name('canteen.index')->withoutMiddleware('auth');
     Route::get('/create', 'create');
     Route::post('/', 'store');
-    Route::get('/{id}', 'show')->withoutMiddleware('auth');
+    Route::get('/{id}', 'show')->name('canteen.show')->withoutMiddleware('auth');
 });
 
 Route::resource('/cart', CartController::class)->middleware('auth');

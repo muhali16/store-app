@@ -4,14 +4,14 @@
         <ul class="flex flex-row space-x-2">
             @guest
                 <li>
-                    <a href="/login">
+                    <a href="{{ route('login') }}">
                         <button class="text-base font-bold text-white bg-blue-400 px-3 py-1 rounded-full transition ease-in duration-200 hover:bg-blue-200 hover:text-blue-500 active:-translate-y-1">
                             Login
                         </button>
                     </a>
                 </li>
                 <li>
-                    <a href="/signup">
+                    <a href="{{ route('signup') }}">
                         <button class="text-base font-bold text-white bg-blue-400 px-3 py-1 rounded-full transition ease-in-out duration-100 hover:bg-blue-200 hover:text-blue-500">
                             Signup
                         </button>
@@ -32,7 +32,7 @@
                             @can('open-canteen')
                                 <a href="{{ url('/canteen/create') }}"><li class="mb-3 hover:text-gray-200 w-full">Buka Kantin</li></a>
                             @endcan
-                            <a href="/logout"><li class="hover:text-gray-200 w-full">Logout</li></a>
+                            <a href="{{ route('logout') }}"><li class="hover:text-gray-200 w-full">Logout</li></a>
                         </ul>
                     </div>
                 </li>
@@ -54,7 +54,7 @@
         <nav id="nav-menu" class="hidden w-52 z-50 absolute top-12 p-4 shadow-lg backdrop-blur-lg rounded-lg  bg-blue-400/50 md:static md:block md:shadow-none md:rounded-none md:max-full md:mb-0 md:p-0 md:bg-transparent">
             <ul class="block-inline md:flex md:flex-row">
                 <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
-                    <a href="/home">
+                    <a href="{{ route('home') }}">
                         <button>
                             Home
                         </button>
@@ -62,7 +62,7 @@
                 </li>
                 @auth
                 <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
-                    <a href="/user/{{ auth()->user()->slug }}">
+                    <a href="{{ route('user.show', ['user' => auth()->user()->slug]) }}">
                         <button>
                             Profile
                         </button>
@@ -77,14 +77,14 @@
                     </a>
                 </li>
                 <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
-                    <a href="#menu">
+                    <a href="{{ url('/home#menu') }}">
                         <button>
                             Menu
                         </button>
                     </a>
                 </li>
                 <li class="group py-1 pr-6 text-blue-900 text-lg font-semibold hover:text-blue-700 md:text-white">
-                    <a href="#about">
+                    <a href="{{ url('/home#about') }}">
                         <button>
                             About
                         </button>
