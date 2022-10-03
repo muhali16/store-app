@@ -24,7 +24,7 @@
                 <input type="password" name="password" placeholder="Password" class="bg-gray-200 rounded-md py-2 px-3 w-96 border-none focus:ring-2 focus:ring-gray-400 focus:outline-none focus:bg-white" autocomplete="off"></input>
                 <button type="submit" class="py-2 px-3 w-32 rounded-md text-white bg-blue-900 font-bold hover:opacity-80">Login</button>
             </form>
-            <p class="text-center text-sm">Don't have account? <a href="/signup" class="text-blue-700 ">Signup</a>.</p>
+            <p class="text-center text-sm">Don't have account? <a href="{{ route('signup') }}" class="text-blue-700 ">Signup</a>.</p>
         </div>
     </div>
 </section>

@@ -42,7 +42,7 @@
                 @enderror
                 <button type="submit" class="py-2 px-3 w-32 rounded-md text-white bg-blue-900 font-bold hover:opacity-80">Login</button>
             </form>
-            <p class="text-center text-sm">Already have account? <a href="/login" class="text-blue-700 ">Login</a>.</p>
+            <p class="text-center text-sm">Already have account? <a href="{{ route('login') }}" class="text-blue-700 ">Login</a>.</p>
         </div>
     </div>
 </section>

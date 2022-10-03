@@ -18,7 +18,16 @@ class CanteenController extends Controller
      */
     public function index()
     {
-        return abort(500);
+        $hor = 3;
+        $ver = 7;
+        echo "Nilai horizontal: $hor <br>";
+        echo "Nilai vertikal  : $ver <br> <br>";
+        for ($i = 1 ; $i < $hor+1 ; $i++){
+            for ($j = 1 ; $j < $ver+1 ; $j++){
+                echo "Hasil perkalian $i x $j adalah " . $i*$j . "<br>";
+            }
+            echo "<br><br>";
+        }
     }
 
     /**

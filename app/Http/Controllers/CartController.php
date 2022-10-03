@@ -34,11 +34,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        if(!auth()->check()){
-            return redirect(route('login'));
-        }
-
-        return back();
+        //
     }
 
     /**

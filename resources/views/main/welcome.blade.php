@@ -135,14 +135,13 @@
                 <div class="p-5">
                     <h2 class="text-xl text-gray-700 font-bold mb-2">{{ $canteen->nama_kantin }}</h2>
                     <p class="text-sm text-gray-500 font-semibold mb-3">{{ $canteen->alamat }}</p>
-                    <h3 class="text-base text-blue-600 hover:text-blue-800"><a href="/canteen/{{ $canteen->id }}">Kunjungi Kantin</a></h3>
+                    <h3 class="text-base text-blue-600 hover:text-blue-800"><a href="{{ route('canteen.show', ['id' => $canteen->id]) }}">Kunjungi Kantin</a></h3>
                 </div>
             </div>
         @endforeach
     </div>
 </section>
 </main>
-
 
 @include('layouts.footer')
 @endsection

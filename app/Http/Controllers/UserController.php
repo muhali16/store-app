@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return abort(404);
+        return abort(400);
     }
 
     /**
@@ -51,6 +52,11 @@ class UserController extends Controller
         $validated['slug'] = str()->of($slug)->slug('-')->lower();
         
         User::create($validated);
+        $user = User::where('email', $validated['email'])->first();
+        Cart::create([
+            'user_id' => $user->id,
+            'harga_total' => 0,
+        ]);
 
         return redirect('login')->with('success-login', 'Registrasi berhasil! Silakan login untuk melanjutkan.');
     }
