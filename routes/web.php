@@ -10,6 +10,7 @@ use App\Http\Controllers\CanteenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CanteenDahboardController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +58,4 @@ Route::prefix('/canteen')->controller(CanteenController::class)->middleware('aut
 });
 
 Route::resource('/cart', CartController::class)->middleware('auth');
+Route::post('/item', [ItemController::class, 'store'])->name('item.store')->middleware('auth');

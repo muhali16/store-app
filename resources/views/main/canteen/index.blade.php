@@ -26,7 +26,7 @@
                                 class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
                                 data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('cart.store') }}" method="post">
+                        <form action="{{ route('item.store') }}" method="post">
                             @csrf
                             <input type="text" value="{{ $recomended->id }}" name="menu_id" hidden>
                             <div class="modal-body relative p-4 text-gray-700 grid grid-cols-2 gap-4">
@@ -120,7 +120,7 @@
 </section>
 <!-- Makanan -->
 @foreach ($categories as $category)
-    <section class="w-full px-4 md:px-10">
+<section class="w-full px-4 md:px-10">
     <h1 class="my-3 text-2xl text-blue-500 font-semibold py-2 border-b-2">{{ $category }}</h1>
     <div class="flex flex-wrap gap-1 md:gap-4">
         @foreach ($menus as $menu)
@@ -137,8 +137,9 @@
                                     class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
                                     data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="{{ route('cart.store') }}" method="post">
+                            <form action="{{ route('item.store') }}" method="post">
                                 @csrf
+                                <input type="text" name="menu_id" value="{{ $menu->id }}" hidden>
                                 <div class="modal-body relative p-4 text-gray-700 grid grid-cols-2 gap-4">
                                     <div class="pl-5">
                                         <img src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Photo" class="w-full h-full rounded-lg shadow-md object-cover">

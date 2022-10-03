@@ -10,5 +10,6 @@
 <body class="relative">
     @yield('container')
 
+    @include('layouts.preloader2')
 </body>
 </html>
