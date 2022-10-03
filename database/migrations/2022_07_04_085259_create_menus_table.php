@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('canteen_id');
-            $table->foreignId('category_id');
+            $table->foreignId('canteen_id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('category_id')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->string('photo');
             $table->integer('harga');

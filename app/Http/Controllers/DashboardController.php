@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wallet;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Canteen;
+use App\Models\Cart;
 use App\Models\Category;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {

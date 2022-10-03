@@ -59,3 +59,4 @@ Route::prefix('/canteen')->controller(CanteenController::class)->middleware('aut
 
 Route::resource('/cart', CartController::class)->middleware('auth');
 Route::post('/item', [ItemController::class, 'store'])->name('item.store')->middleware('auth');
+Route::post('/item/update', [ItemController::class, 'update'])->name('item.update')->middleware('auth');

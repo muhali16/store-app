@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('harga_total');
+            $table->text('location')->nullable();
+            $table->integer('total_many')->nullable();
             $table->timestamps();
         });
     }

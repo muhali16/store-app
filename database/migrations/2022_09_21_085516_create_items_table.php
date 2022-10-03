@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cart_id');
-            $table->foreignId('menu_id');
+            $table->foreignId('menu_id')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('many');
             $table->text('note')->nullable();
             $table->integer('total_price');

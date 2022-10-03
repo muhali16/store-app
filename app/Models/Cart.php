@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Item;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cart extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['harga_total', 'user_id'];
+    protected $fillable = ['harga_total', 'user_id', 'total_many', 'location'];
+
+    public function item(){
+        return $this->hasOne(Item::class);
+    }
 }

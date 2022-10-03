@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -13,7 +15,13 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('main.cart.index');
+        $items = Item::where('cart_id', auth()->user()->cart->id)->get();
+        $cart = Cart::find(auth()->user()->cart->id);
+        // dd($items);
+        return view('main.cart.index', [
+            'items' => $items,
+            'cart' => $cart
+        ]);
     }
 
     /**

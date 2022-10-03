@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
             $table->string('wallet_name');
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->onDelete('cascade')->onUpdate('cascade');
             $table->float('saldo', 15, 2);
             $table->string('no_hp')->unique();
             $table->text('alamat');
