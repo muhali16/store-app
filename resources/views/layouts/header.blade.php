@@ -1,7 +1,7 @@
 <header class="flex flex-col">
     <div class="w-full px-4 py-3 bg-gradient-to-l from-blue-700 to-blue-900 flex flex-row justify-between items-center md:px-10">
         <h1 class="text-3xl font-bold text-white">Kantin Kejujuran</h1>
-        <ul class="flex flex-row space-x-2 h-fit">
+        <ul class="flex flex-row space-x-5 h-fit">
             @guest
                 <li>
                     <a href="{{ route('login') }}">

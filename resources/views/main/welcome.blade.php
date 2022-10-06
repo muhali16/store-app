@@ -121,7 +121,7 @@
             <div class="absolute bg-orange-600 text-white font-bold px-4 py-1 rounded-br-lg">
                 {{ $category->name }}
             </div>
-            <img class="object-cover bg-cover bg-center transition ease-in-out duration-200 w-full hover:scale-125" src="{{ asset('storage/'.$category->photo) }}" alt="Food">
+            <img class="bg-cover bg-center transition ease-in-out duration-200 w-full hover:scale-125" src="{{ asset('storage/'.$category->photo) }}" alt="Food">
         </div>
         @endforeach
     </div>

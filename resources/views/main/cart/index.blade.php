@@ -97,7 +97,7 @@
 <section class="p-4 w-full grid grid-cols-1 gap-4 lg:grid-cols-2 md:p-10">
     <div class="w-full">
         @foreach ($items as $item)
-        <div class="border shadow-sm border-gray-500 max-w-lg w-full overflow-hidden flex flex-row max-h-sm h-44 mb-5">
+        <div class="border shadow-sm border-gray-500 w-full overflow-hidden flex flex-row h-44 mb-5">
             <img src="{{ asset('storage/' . $item->menu->photo) }}" alt="Menu Photo" class="object-cover bg-cover w-1/3">
             <div class="p-3 w-full">
                 <h2 class="text-xl font-semibold text-gray-800 mb-1">{{ $item->menu->name }}</h2>
@@ -107,7 +107,9 @@
                         <span class="text-base">Qty: {{ $item->many }}</span>
                         <span class="text-base font-bold">Total: @currency($item->total_price)</span>
                     </div>
-                    <form action="#" method="POST" class="group absolute right-2">
+                    <form action="{{ route('item.destroy') }}" method="POST" class="group absolute right-2">
+                        @csrf
+                        <input type="text" value="{{ $item->id }}" name="item_id" hidden>
                         <button class="py-2 px-3 bg-red-600 group-hover:bg-red-300 flex items-center flex-col rounded-md" type="submit" name="delete_item">
                             <svg class="stroke-white group-hover:stroke-red-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                         </button>
@@ -122,12 +124,14 @@
     <div class="rounded bg-blue-50 shadow-sm p-5 w-full mt-5 md:mt-0">
         <h1 class="text-blue-900 text-3xl font-bold mb-2">Summary</h1>
         <ol class="border-b-2 border-t-2 border-blue-700 py-3 space-y-1">
-            @foreach ($items as $item)
+            @forelse ( $items as $item )
             <li class="flex flex-row justify-between">
                 <p class="text-gray-500">{{ $item->menu->name }} {{ $item->many }}x</p>
                 <span class="font-semibold">@currency( $item->total_price )</span>
             </li>
-            @endforeach
+            @empty
+            <span class="text-center font-semibold text-gray-600 text-xl">Jajan dulu yuk!</span>
+            @endforelse
         </ol>
         <h2 class="text-xl font-bold text-blue-700 text-right mb-5 mt-3">@currency($cart->harga_total)</h2>
         <h2 class="text-blue-900 text-3xl font-bold">Promo</h2>

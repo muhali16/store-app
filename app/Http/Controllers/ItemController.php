@@ -74,7 +74,37 @@ class ItemController extends Controller
 
         Item::find($request->item_id)->update($validated);
 
-        return redirect()->back();
+        $items = Item::where('cart_id', auth()->user()->cart->id)->get();
+        $total_price = 0;
+        $total_many = 0;
+        foreach($items as $item){
+            $total_price += $item->total_price;
+            $total_many += $item->many;
+        }
 
+        Cart::find(auth()->user()->cart->id)->update(['harga_total' => $total_price, 'total_many' => $total_many]);
+        
+        return redirect()->back();
+    }
+
+    public function destroy(Request $request)
+    {
+        if(!auth()->check()){
+            return redirect(route('login'));
+        }
+
+        $item = Item::find($request->item_id)->firstOrFail();
+        $item->delete();
+
+        $items = Item::where('cart_id', auth()->user()->cart->id)->get();
+        $total_price = 0;
+        $total_many = 0;
+        foreach($items as $item){
+            $total_price += $item->total_price;
+            $total_many += $item->many;
+        }
+        Cart::find(auth()->user()->cart->id)->update(['harga_total' => $total_price, 'total_many' => $total_many]);
+
+        return redirect()->back();
     }
 }
