@@ -9,7 +9,7 @@ export default defineConfig({
             'resources/js/swiper.js',
         ]),
     ],
-    server : {
-        host: '192.168.1.7',
-    },
+//     server : {
+//         host: '192.168.1.7',
+//     }
 });

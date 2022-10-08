@@ -9,17 +9,20 @@
         @endauth
         <div class="w-full flex flex-wrap p-4"> 
             <div class="w-full h-fit bg-blue-200 rounded shadow-md p-6 md:w-1/5">
-                <img src="{{ asset('storage/'.$user->photo) }}" alt="Foto Profile" class="w-32 rounded-lg border-2 border-blue-700 mb-2">
+                <img src="{{ asset('storage/'.$user->photo) }}" id="image" alt="Foto Profile" class="w-32 rounded-lg border-2 border-blue-700 mb-2">
                 <form action="/user/{{ $user->slug }}/photo" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
-                    <label for="profile_photo" class="text-md text-gray-600 text-semibold mb-2">Ganti Foto Profile</label>
+                    <label for="input" class="text-md text-gray-600 text-semibold mb-2">Ganti Foto Profile</label>
                     @if (session('success-change-photo'))
                         <div class="w-full bg-green-300 border border-green-700 text-green-900 text-lg rounded-md my-4 p-3">
                             {{ session('success-change-photo') }}
                         </div>
                     @endif
-                    <input type="file" name="profile_photo" id="profile_photo" class="block file:bg-blue-300 file:border-none file:hover:bg-blue-900 file:hover:text-white file:rounded-md file:text-blue-800 file:px-3 text-gray-600" required></input>
+                    <input type="file" name="profile_photo" id="input" class="sr-only peer" onchange="upload()" required>
+                    <label for="input" class="block my-3 px-3 py-2 rounded-md bg-blue-700 text-white @error('profile_photo') border-2 border-red-600 @enderror">
+                        Masukan Gambar
+                    </label>
                     @error('profile_photo')
                         <div class="text-red-600 text-sm font-semibold text-right w-full">
                             {{ $message }}
@@ -129,4 +132,18 @@
     </section>
 </main>
 @include('layouts.footer')
+{{-- @vite('resource/js/image-preview.js') --}}
+<script>
+    function upload(){
+    var img = document.getElementById('image')
+    var input = document.getElementById('input')
+
+    const oFReader = new FileReader()
+    oFReader.readAsDataURL(input.files[0])
+
+    oFReader.onload = function(oFREvent){
+        img.src = oFREvent.target.result
+    }
+}
+</script>
 @endsection

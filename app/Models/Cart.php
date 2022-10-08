@@ -13,6 +13,6 @@ class Cart extends Model
     protected $fillable = ['harga_total', 'user_id', 'total_many', 'location'];
 
     public function item(){
-        return $this->hasOne(Item::class);
+        return $this->hasMany(Item::class);
     }
 }

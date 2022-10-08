@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use App\Models\Cart;
+use App\Models\Item;
 use App\Models\Menu;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Exception;
 use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
@@ -130,9 +132,23 @@ class MenuController extends Controller
     {
         $this->authorize('canteen-dashboard');
 
+        $item = Item::where('menu_id', $menu);
+        $item->delete();
+        
         $menu = Menu::find($menu);
         Storage::delete($menu->photo);
         $menu->delete();
+        
+
+        $items = Item::where('cart_id', auth()->user()->cart->id)->get();
+        $total_price = 0;
+        $total_many = 0;
+        foreach($items as $item){
+            $total_price += $item->total_price;
+            $total_many += $item->many;
+        }
+
+        Cart::find(auth()->user()->cart->id)->update(['harga_total' => $total_price, 'total_many' => $total_many]);
 
         return redirect(route('menu.index'))->with('success-delete-menu', 'Berhasil menghapus item dari menu');
     }

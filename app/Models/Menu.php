@@ -28,6 +28,6 @@ class Menu extends Model
 
     public function item()
     {
-        return $this->hasOne(Item::class);
+        return $this->hasMany(Item::class);
     }
 }

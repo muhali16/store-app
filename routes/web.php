@@ -24,6 +24,7 @@ use App\Models\Item;
 |
 */
 
+Route::get('/home', [DashboardController::class, 'index'])->name('home');
 Route::get('/', fn() => redirect('home'));
 
 Route::resource('/user', UserController::class)->scoped(['user' => 'slug']);
@@ -33,10 +34,8 @@ Route::controller(UserController::class)->prefix('/user')->group(function(){
     Route::put('/{user:slug}/photo', 'changePhoto');
 });
 
-Route::get('/home', [DashboardController::class, 'index'])->name('home');
-
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'auth']);
+Route::post('/login', [LoginController::class, 'auth'])->name('login.auth');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 Route::get('/signup', [SignupController::class, 'index'])->name('signup')->middleware('guest');
 
