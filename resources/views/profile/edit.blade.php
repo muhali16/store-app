@@ -58,7 +58,7 @@
                         </div>
                     @enderror
                     <label for="email" class="mb-1">Email</label>
-                    <input type="email" name="email" id="email" class="px-2 py-1 text-gray-600 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-blue-600 border-blue-400 border @error('email') ring-2 ring-red-600 @enderror" value="{{ $user->email }}"></input>
+                    <input type="email" name="email" id="email" class="px-2 py-1 text-gray-600 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-blue-600 border-blue-400 border @error('email') ring-2 ring-red-600 @enderror" value="{{ $user->email }}">
                     @error('email')
                         <div class="text-red-600 text-sm font-semibold text-right w-full">
                             {{ $message }}
@@ -82,27 +82,28 @@
                         </div>
                     @endif
                     <label for="password" class="mb-1">Old Password</label>
-                    <input type="password" name="password" id="password" class="px-2 py-1 text-gray-600 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-blue-600 border-blue-400 border"></input>
+                    <input type="password" name="password" id="password" class="px-2 py-1 text-gray-600 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-blue-600 border-blue-400 border">
                     @error('password')
                         <div class="text-red-600 text-sm font-semibold text-right w-full">
                             {{ $message }}
                         </div>
                     @enderror
                     <label for="new-password" class="mb-1">New Password</label>
-                    <input type="password" name="new-password" id="new-password" class="px-2 py-1 text-gray-600 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-blue-600 border-blue-400 border"></input>
+                    <input type="password" name="new-password" id="new-password" class="px-2 py-1 text-gray-600 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-blue-600 border-blue-400 border">
                     @error('new-password')
                         <div class="text-red-600 text-sm font-semibold text-right w-full">
                             {{ $message }}
                         </div>
                     @enderror
                     <label for="new-password_confirmation" class="mb-1">Confirm New Password</label>
-                    <input type="password" name="new-password_confirmation" id="new-password_confirmation" class="px-2 py-1 text-gray-600 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-blue-600 border-blue-400 border"></input>
+                    <input type="password" name="new-password_confirmation" id="new-password_confirmation" class="px-2 py-1 text-gray-600 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-blue-600 border-blue-400 border">
                     @error('new-password_confirmation')
                         <div class="text-red-600 text-sm font-semibold text-right w-full">
                             {{ $message }}
                         </div>
                     @enderror
-                    <button type="submit" class="w-fit bg-blue-900 text-white px-4 py-1 mt-5 rounded shadow-md hover:opacity-75">Ganti</button>
+                    <span id="msg" class="mb-4 text-sm"></span>
+                    <button type="submit" class="w-fit bg-blue-900 text-white px-4 py-1 mt-5 rounded shadow-md hover:opacity-75" id="ganti">Ganti</button>
                 </form>
             </div>
             @if ($user->wallet)
@@ -137,7 +138,7 @@
     function upload(){
     var img = document.getElementById('image')
     var input = document.getElementById('input')
-
+    
     const oFReader = new FileReader()
     oFReader.readAsDataURL(input.files[0])
 
@@ -145,5 +146,21 @@
         img.src = oFREvent.target.result
     }
 }
+
+var password = document.querySelector('#new-password')
+var input_confirm = document.querySelector('#new-password_confirmation')
+var text = document.querySelector('#msg')
+
+input_confirm.addEventListener('input', () => {
+    if(password.value == input_confirm.value){
+        text.textContent = 'Password match'
+        text.classList.remove('text-red-600')
+        text.classList.add('text-green-600')
+    } else {
+        text.textContent = 'Password not match'
+        text.classList.remove('text-green-600')
+        text.classList.add('text-red-600')
+    }
+})
 </script>
 @endsection
